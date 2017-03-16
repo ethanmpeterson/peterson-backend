@@ -18,4 +18,4 @@ class StudentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Student
-        fields = ('grade', 'owner')
+        fields = ('grade', 'owner', 'schedule')

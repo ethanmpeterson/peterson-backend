@@ -11,8 +11,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 # Create your views here.
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserList(viewsets.ModelViewSet):
     # API endpoint allowing user list to be retrieved or edited
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
@@ -21,7 +23,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-class StudentViewSet(viewsets.ModelViewSet):
+class StudentList(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
