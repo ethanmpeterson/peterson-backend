@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 
 
 class Student(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='student', on_delete=models.CASCADE)
-    schedule = models.ForeignKey('auth.User', related_name='schedule', on_delete=models.CASCADE)
+    #owner = models.ForeignKey('auth.User', related_name='student', on_delete=models.CASCADE)
     grade = models.CharField(max_length=2)
 
 class Schedule(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE)
     # day 1 class holders
     d1p1 = models.CharField(max_length=150)
     d1p2 = models.CharField(max_length=150)

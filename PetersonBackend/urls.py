@@ -23,9 +23,9 @@ router.register(r'users', views.UserList)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'students', views.StudentList)
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^register/', views.RegistrationView.as_view(), name ='register'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
