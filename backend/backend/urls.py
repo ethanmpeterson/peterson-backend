@@ -12,4 +12,5 @@ router.register(r'schedules', views.ScheduleList)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    url(r'^register', views.RegisterView.as_view(), name='register'),
 ]
