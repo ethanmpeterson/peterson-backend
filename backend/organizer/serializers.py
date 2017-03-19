@@ -50,12 +50,21 @@ class CreateStudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ('user', 'id', 'grade') # what fields are returned in JSON response
 
-# class CreateSchedule(serializers.ModelSerializer):
-#     def create(self, validated_data):
-#         schedule = Schedule.objects.create(
-#             student = validated_data['student'],
-#             d1p1 = validated_data['d1p1'],
-#             d1p2 = validated_data['d1p2'],
-#             d1p3 = validated_data['d1p3'],
-#             d1p4 = validated_data['d1p4'],
-#         )
+class CreateScheduleSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        schedule = Schedule.objects.create(
+            student = validated_data['student'],
+            d1p1 = validated_data['d1p1'],
+            d1p2 = validated_data['d1p2'],
+            d1p3 = validated_data['d1p3'],
+            d1p4 = validated_data['d1p4'],
+            d2p1 = validated_data['d2p1'],
+            d2p2 = validated_data['d2p2'],
+            d2p3 = validated_data['d2p3'],
+            d2p4 = validated_data['d2p4']
+        )
+        schedule.save()
+        return schedule
+    class Meta:
+        model = Schedule
+        fields = ('student', 'id', 'd1p1', 'd1p2', 'd1p3', 'd1p4', 'd2p1', 'd2p2', 'd2p3', 'd2p4')
