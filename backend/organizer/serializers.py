@@ -37,3 +37,25 @@ class RegisterSerializer(serializers.ModelSerializer): # registration serializer
     class Meta:
         model = User
         fields = ('username', 'password', 'first_name', 'last_name', 'email', 'id')
+
+class CreateStudentSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        student = Student.objects.create(
+            user = validated_data['user'],
+            grade = validated_data['grade']
+        )
+        student.save()
+        return student
+    class Meta:
+        model = Student
+        fields = ('user', 'id', 'grade') # what fields are returned in JSON response
+
+# class CreateSchedule(serializers.ModelSerializer):
+#     def create(self, validated_data):
+#         schedule = Schedule.objects.create(
+#             student = validated_data['student'],
+#             d1p1 = validated_data['d1p1'],
+#             d1p2 = validated_data['d1p2'],
+#             d1p3 = validated_data['d1p3'],
+#             d1p4 = validated_data['d1p4'],
+#         )

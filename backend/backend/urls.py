@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
     url(r'^register', views.RegisterView.as_view(), name='register'),
+    url(r'^create_student', views.CreateStudent.as_view(), name='create_student'),
 ]
