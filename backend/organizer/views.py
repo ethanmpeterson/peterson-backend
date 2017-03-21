@@ -4,13 +4,18 @@ from rest_framework import permissions
 from django.contrib.auth.models import User
 from rest_framework.generics import CreateAPIView
 
-from models import Student, Schedule
+from models import *
 from serializers import *
 
 class UserList(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class ParentList(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Parent.objects.all()
+    serializer_class = ParentSerializer
 
 class StudentList(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -36,4 +41,5 @@ class CreateSchedule(CreateAPIView):
     model = Schedule
     serializer_class = CreateScheduleSerializer
     permission_classes = (permissions.AllowAny,)
+
 

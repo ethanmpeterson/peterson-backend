@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from models import Student, Schedule
+from models import Student, Schedule, Parent
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,6 +15,15 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ('user', 'id', 'grade')
+
+class ParentSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(many=False, queryset=User.objects.all())
+    kid1 = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
+    kid2 = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
+
+    class Meta:
+        model = Parent
+        fields = ('user', 'kid1', 'kid2', 'id')
 
 class ScheduleSerializer(serializers.ModelSerializer):
     student = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())

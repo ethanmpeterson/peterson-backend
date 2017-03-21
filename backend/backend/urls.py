@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserList)
 router.register(r'students', views.StudentList)
 router.register(r'schedules', views.ScheduleList)
+router.register(r'parents', views.ParentList)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
