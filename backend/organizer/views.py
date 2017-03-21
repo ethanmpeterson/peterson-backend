@@ -38,6 +38,12 @@ class GetStudent(ListAPIView):
     def get_queryset(self):
         return Student.objects.filter(user=self.request.user)
 
+class GetParent(ListAPIView):
+    serializer_class = ParentSerializer
+
+    def get_queryset(self):
+        return Parent.objects.filter(user=self.request.user)
+
 class CreateStudent(CreateAPIView):
     model = Student
     serializer_class = CreateStudentSerializer
