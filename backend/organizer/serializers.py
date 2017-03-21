@@ -20,10 +20,11 @@ class ParentSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(many=False, queryset=User.objects.all())
     kid1 = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
     kid2 = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
+    kid3 = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
 
     class Meta:
         model = Parent
-        fields = ('user', 'kid1', 'kid2', 'id')
+        fields = ('user', 'kid1', 'kid2', 'kid3', 'id')
 
 class ScheduleSerializer(serializers.ModelSerializer):
     student = serializers.PrimaryKeyRelatedField(many=False, queryset=Student.objects.all())
@@ -77,3 +78,18 @@ class CreateScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Schedule
         fields = ('student', 'id', 'd1p1', 'd1p2', 'd1p3', 'd1p4', 'd2p1', 'd2p2', 'd2p3', 'd2p4')
+
+class CreateParentSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        parent = Parent.objects.create(
+            user = validated_data['user'],
+            kid1 = validated_data['kid1'],
+            kid2 = validated_data['kid2'],
+            kid3 = validated_data['kid3']
+        )
+        parent.save()
+        return parent
+    class Meta:
+        model = Parent
+        fields = ('user', 'id', 'kid1', 'kid2', 'kid3')
+

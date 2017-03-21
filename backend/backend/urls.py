@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^register', views.RegisterView.as_view(), name='register'),
     url(r'^create_student', views.CreateStudent.as_view(), name='create_student'),
     url(r'^create_schedule', views.CreateSchedule.as_view(), name='create_schedule'),
+    url(r'^create_parent', views.CreateParent.as_view(), name='create_parent'),
 ]

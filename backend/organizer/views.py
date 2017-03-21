@@ -42,4 +42,10 @@ class CreateSchedule(CreateAPIView):
     serializer_class = CreateScheduleSerializer
     permission_classes = (permissions.AllowAny,)
 
+class CreateParent(CreateAPIView):
+    model = Parent
+    serializer_class = CreateParentSerializer
+    permission_classes = (permissions.AllowAny,)
+
+
 

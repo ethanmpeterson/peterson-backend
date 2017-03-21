@@ -31,5 +31,6 @@ class Parent(models.Model):
     user = models.ForeignKey(User, related_name='parent', on_delete=models.CASCADE)
     kid1 = models.ForeignKey(Student, related_name='kid1', on_delete=models.CASCADE, null=True)
     kid2 = models.ForeignKey(Student, related_name='kid2', on_delete=models.CASCADE, null=True)
+    kid3 = models.ForeignKey(Student, related_name='kid3', on_delete=models.CASCADE, null=True)
     def __str__(self):
         return str(self.id)
