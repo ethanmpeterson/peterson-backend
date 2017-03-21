@@ -2,15 +2,15 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import permissions
 from django.contrib.auth.models import User
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 
 from models import *
 from serializers import *
 
 class UserList(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 class ParentList(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -31,6 +31,12 @@ class RegisterView(CreateAPIView):
     model = User
     serializer_class = RegisterSerializer
     permission_classes = (permissions.AllowAny,)
+
+class GetStudent(ListAPIView):
+    serializer_class = StudentSerializer
+
+    def get_queryset(self):
+        return Student.objects.filter(user=self.request.user)
 
 class CreateStudent(CreateAPIView):
     model = Student
