@@ -93,3 +93,14 @@ class CreateParentSerializer(serializers.ModelSerializer):
         model = Parent
         fields = ('user', 'id', 'kid1', 'kid2', 'kid3')
 
+class GetScheduleSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        schedule = Schedule.objects.get(
+            student = validated_data['student']
+        )
+        schedule.save()
+        return schedule
+    class Meta:
+        model = Schedule
+        fields = ('id', 'student')
+

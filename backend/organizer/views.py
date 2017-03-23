@@ -3,7 +3,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from django.contrib.auth.models import User
 from rest_framework.generics import CreateAPIView, ListAPIView
-
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
 from models import *
 from serializers import *
 
@@ -44,6 +46,18 @@ class GetParent(ListAPIView):
     def get_queryset(self):
         return Parent.objects.filter(user=self.request.user)
 
+# @api_view(['POST'])
+# def GetScheduleWithStudentId(request):
+#     serializer = GetScheduleSerializer(data=request.data)
+#     if serializer.is_valid():
+#         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetScheduleWithStudentId(CreateAPIView):
+    model = Schedule
+    serializer_class = GetScheduleSerializer
+    permission_classes = (permissions.AllowAny,)
+
 class CreateStudent(CreateAPIView):
     model = Student
     serializer_class = CreateStudentSerializer
@@ -58,6 +72,7 @@ class CreateParent(CreateAPIView):
     model = Parent
     serializer_class = CreateParentSerializer
     permission_classes = (permissions.AllowAny,)
+
 
 
 
